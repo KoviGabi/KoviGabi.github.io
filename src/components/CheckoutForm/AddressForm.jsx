@@ -23,9 +23,10 @@ const AddressForm = ({ checkoutToken, next }) => {
 
     const fetchShippingOptions = async (checkoutTokenId, country) => {
         const options = await commerce.checkout.getShippingOptions(checkoutTokenId, { country });
+        console.log(country);
         setShippingOptions(options);
         setShippingOption(options[0].id);
-    }
+    };
 
     useEffect(() => {
         fetchShippingCountries(checkoutToken.id);
@@ -33,7 +34,7 @@ const AddressForm = ({ checkoutToken, next }) => {
 
     useEffect(() => {
         fetchShippingOptions(checkoutToken.id, shippingCountry);
-    }, [shippingCountry])
+    }, [shippingCountry]);
 
     return (
         <>
@@ -59,6 +60,7 @@ const AddressForm = ({ checkoutToken, next }) => {
                             </Select>
                         </Grid>
                     </Grid>
+                    <br/><br/>
                     <div style={{display: 'flex', justifyContent: 'space-between'}} >
                         <Button component={Link} to="/cart" variant="outlined">Back to Cart</Button>
                         <Button type="submit" variant="contained" color="primary">Next</Button>
